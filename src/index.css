@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    background-color: #0e0f0a;
+}
+
+.purple__gradient {
+    background: linear-gradient(90deg, #b940ff 0%, #9000b4 100%);
+    filter: blur(200px);
+}
+
+.cyan__gradient {
+    background: linear-gradient(90deg, #0fa7ff 0%, #0068ca 100%);
+    filter: blur(190px);
+}

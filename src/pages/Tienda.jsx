@@ -1,5 +1,5 @@
 const Tienda = () => {
-  return <div>Esto es la tienda</div>;
+  return <div className="text-white">Esto es la tienda</div>;
 };
 
 export default Tienda;
