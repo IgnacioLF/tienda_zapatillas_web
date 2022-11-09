@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 const PurpleButton = ({ type, children, Click, styles }) => {
   return (
     <button
