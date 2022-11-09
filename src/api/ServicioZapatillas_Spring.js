@@ -1,7 +1,7 @@
 import { SpringHost } from "../constants/constants";
 
 // TODO check
-export const obtenerZapatillas = () => {
+/* export const obtenerZapatillas = () => {
   const obtenerZapatillasURL = `${SpringHost}ServicioZapatillas/obtenerZapatillas`;
   fetch("/api")
     .then((response) => {
@@ -14,3 +14,4 @@ export const obtenerZapatillas = () => {
       return Promise.reject(error);
     });
 };
+ */

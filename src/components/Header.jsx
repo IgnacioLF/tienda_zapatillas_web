@@ -5,6 +5,7 @@ import OutlineButton from "./OutlineButton";
 import PurpleButton from "./PurpleButton";
 import { useSignInValidator } from "../customHooks/useSigninValidator";
 import ErrorDiv from "./ErrorDiv";
+import { inicioSesionUsuario } from "../api/ServicioWebUsuarios_Spring";
 
 const Header = () => {
   const [userDropdown, setUserDropdown] = useState(false);
@@ -18,6 +19,7 @@ const Header = () => {
   const { errors, validateForm, onBlurField } = useSignInValidator(form);
 
   const onUpdateField = (e) => {
+    setSubmitError("");
     const field = e.target.name;
     const nextFormState = {
       ...form,
@@ -46,12 +48,19 @@ const Header = () => {
     navigate("/registrarse");
   };
 
-  const onSubmitSignIn = (e) => {
+  const onSubmitSignIn = async (e) => {
+    setSubmitError("");
     e.preventDefault();
     const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
-    console.log(errors);
     if (!isValid) return;
-    console.log("la parte del front del sign in is es correcta");
+    const response = await inicioSesionUsuario(form.email, form.password);
+    if (!response.ok) {
+      setSubmitError("Credenciales incorrectas");
+      return;
+    }
+    // TODO login user
+    alert("usuario logeado");
+    console.log("usuario logeado");
   };
 
   return (
@@ -110,6 +119,9 @@ const Header = () => {
                     inputValue={form.email}
                     inputOnChange={onUpdateField}
                     inputOnBlur={onBlurField}
+                    errorform={
+                      errors.email.touched && errors.email.error ? true : null
+                    }
                   />
                   {errors.email.touched && errors.email.error ? (
                     <ErrorDiv
@@ -125,6 +137,11 @@ const Header = () => {
                     inputValue={form.password}
                     inputOnBlur={onBlurField}
                     inputOnChange={onUpdateField}
+                    errorform={
+                      errors.password.touched && errors.password.error
+                        ? true
+                        : null
+                    }
                   />
                   {errors.password.touched && errors.password.error ? (
                     <ErrorDiv

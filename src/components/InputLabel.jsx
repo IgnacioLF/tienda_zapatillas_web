@@ -6,12 +6,17 @@ const InputLabel = ({
   inputName,
   inputOnBlur,
   styles,
+  errorform,
 }) => {
+  let errorStyles = "";
+  if (errorform) {
+    errorStyles = "border-2 border-red-500";
+  }
   return (
     <label className={`${styles} flex flex-col`}>
       <span className="ml-1">{label}</span>
       <input
-        className="mt-1 rounded-sm text-gray-900 p-1"
+        className={`${errorStyles} mt-1 rounded-sm text-gray-900 p-1`}
         name={inputName}
         type={inputType}
         value={inputValue}
