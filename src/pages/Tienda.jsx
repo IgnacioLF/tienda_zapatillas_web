@@ -4,8 +4,8 @@ const Tienda = () => {
     "http://localhost:8080/19-SpringMVC-tienda_hibernate-MAIN/ServicioZapatillas/obtenerZapatillas"
   )
     .then((response) => {
-      response.json();
       console.log("response :", response);
+      return response.json();
     })
     .then((data) => {
       console.log("data :", data);
