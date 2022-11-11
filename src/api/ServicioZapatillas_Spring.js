@@ -1,17 +1,18 @@
 import { SpringHost } from "../constants/constants";
 
-// TODO check
-/* export const obtenerZapatillas = () => {
-  const obtenerZapatillasURL = `${SpringHost}ServicioZapatillas/obtenerZapatillas`;
-  fetch("/api")
+export const obtenerZapatillas = () => {
+  const url = `${SpringHost}ServicioZapatillas/obtenerZapatillas`;
+
+  return fetch(url)
     .then((response) => {
-      response.json();
+      console.log("response :", response);
+      return response.json();
     })
     .then((data) => {
-      return Promise.resolve(data);
+      console.log("data :", data);
+      return data;
     })
     .catch((error) => {
-      return Promise.reject(error);
+      console.log("error :", error);
     });
 };
- */
