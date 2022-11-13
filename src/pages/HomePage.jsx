@@ -1,5 +1,6 @@
 import PurpleButton from "../components/PurpleButton";
 import zapatilla1 from "../assets/zapatilla1.png";
+import zapatillaCaja from "../assets/zapatillas-caja.png";
 import SliderCard from "../components/SliderCard";
 import { useEffect, useState } from "react";
 import { obtenerZapatillas } from "../api/ServicioZapatillas_Spring";
@@ -52,7 +53,7 @@ const HomePage = () => {
       </section>
       <section
         id="ultimos_productos"
-        className="flex mx-[10rem] justify-center mb-10 "
+        className="flex mx-[10rem] justify-center mb-[5rem] "
       >
         <div className="w-full flex flex-col max-w-[60.5rem]">
           <div
@@ -122,23 +123,96 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      {/*       <section
+      <section
         id="detalles_productos"
         className="flex mx-[10rem] justify-center mb-10"
       >
-        <div>
-          <div>
-            <span>Nuestros productos</span>
-            <h2>Conoce la calidad de nuestras zapatillas</h2>
-            <p>
-              Las zapatillas que ofrecemos son de una calidad premiun , que nos
-              ofrecen las mejores marcas del mercado
+        <div className="flex mx-[10rem] justify-center">
+          <div className=" flex flex-col justify-center max-w-[26rem]">
+            <span className="text-cyan-500 text-[1rem]">
+              Nuestros productos
+            </span>
+            <h2 className="font-bold text-white text-[2.6rem] leading-[1.2] mt-2">
+              Conoce la{" "}
+              <span className="font-bold text-transparent bg-clip-text bg- bg-gradient-to-r from-purple-600 to-[#665DE2]">
+                calidad
+              </span>{" "}
+              de nuestras zapatillas
+            </h2>
+            <p className="mt-3 text-gray-400">
+              Las zapatillas que ofrecemos son de una calidad premiun que nos
+              ofrecen las mejores marcas del mercado.
             </p>
-            <div></div>
-            <div></div>
+            <div className="mt-4 flex justify-center items-center">
+              <div className="h-fit mr-4 rounded-lg p-2 bg-gradient-to-r from-purple-600 to-cyan-500 w-fit">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-[2.8rem] h-[2.8rem]"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold">Mejores marcas</h3>
+                <p className="leading-[1.2] text-gray-400">
+                  Tenemos las mejores marcas para poder ofrecer una caldiad
+                  premiun.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 flex justify-center items-center">
+              <div className="h-fit mr-4 rounded-lg p-2 bg-gradient-to-r from-purple-600 to-cyan-500 w-fit">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-[2.8rem] h-[2.8rem]"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M1 4a1 1 0 011-1h16a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4zm12 4a3 3 0 11-6 0 3 3 0 016 0zM4 9a1 1 0 100-2 1 1 0 000 2zm13-1a1 1 0 11-2 0 1 1 0 012 0zM1.75 14.5a.75.75 0 000 1.5c4.417 0 8.693.603 12.749 1.73 1.111.309 2.251-.512 2.251-1.696v-.784a.75.75 0 00-1.5 0v.784a.272.272 0 01-.35.25A49.043 49.043 0 001.75 14.5z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold">Mejores precios</h3>
+                <p className="leading-[1.2] text-gray-400">
+                  Ofrecemos las zapatillas a los precios mas competitivos del
+                  mercado.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="min-w-[34.5rem] flex flex-col justify-center items-center">
+            <div>
+              <div className="p-[2rem] rounded-t-3xl h-fit bg-gradient-to-r from-[#2b1046] to-[#003741]">
+                <img src={zapatillaCaja} className="h-[15rem]" />
+              </div>
+              <div className="bg-gradient-to-r from-purple-600 to-cyan-500 pb-3 rounded-b-3xl">
+                <h3 className="mx-4 font-semibold pt-2 text-[1.6rem]">
+                  Nike Watch Series 7
+                </h3>
+                <div className="flex justify-between mx-4 font-semibold ">
+                  <span className="text-[1.5rem]">50.20$</span>
+                  <a
+                    onClick={() => alert("TODO")}
+                    className="text-[1.2rem] font-semibold rounded-lg px-1 py-[0.1rem] bg-purple-500 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-gray-300"
+                  >
+                    Ver detalles
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 };
