@@ -4,8 +4,10 @@ import zapatillaCaja from "../assets/zapatillas-caja.png";
 import SliderCard from "../components/SliderCard";
 import { useEffect, useState } from "react";
 import { obtenerZapatillas } from "../api/ServicioZapatillas_Spring";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [ultimasZapatillas, setUltimasZapatillas] = useState();
   useEffect(() => {
     const getUltimasZapatillas = async () => {
@@ -15,15 +17,27 @@ const HomePage = () => {
     getUltimasZapatillas();
   }, []);
 
+  const handleClickComprarlasYa = () => {
+    navigate("/tienda");
+  };
+
   return (
     <div className="text-white">
       <div
         id="purple_blur_top_left"
-        className="absolute z-[0] top-[10%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
+        className="absolute z-[0] top-[0%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
       />
       <div
-        id="cyan_blur_top_left"
+        id="cyan_blur_top_right"
         className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
+      />
+      <div
+        id="cyan_blur_middle_left"
+        className="absolute z-[0] left-[-10%] top-[110%] bottom-0 w-[20%] h-[20%] cyan__gradient rounded-full"
+      />
+      <div
+        id="purple_blur_bottom_left"
+        className="absolute z-[0] top-[150%] right-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
       />
       <section id="nueva_coleccion" className="flex mx-[10rem] justify-center">
         <div className="mr-6 flex flex-col justify-center mt-4 max-w-[25rem]">
@@ -43,6 +57,7 @@ const HomePage = () => {
           <PurpleButton
             type={"button"}
             styles="w-fit mt-5 mb-6 text-[1.5rem] font-semibold"
+            Click={handleClickComprarlasYa}
           >
             Compralas Ya
           </PurpleButton>
@@ -191,7 +206,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="min-w-[34.5rem] flex flex-col justify-center items-center">
-            <div>
+            <div className="ml-[3.5rem]">
               <div className="p-[2rem] rounded-t-3xl h-fit bg-gradient-to-r from-[#2b1046] to-[#003741]">
                 <img src={zapatillaCaja} className="h-[15rem]" />
               </div>

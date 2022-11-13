@@ -7,6 +7,7 @@ const InputLabel = ({
   inputOnBlur,
   styles,
   errorform,
+  labelStyles,
 }) => {
   let errorStyles = "";
   if (errorform) {
@@ -14,7 +15,7 @@ const InputLabel = ({
   }
   return (
     <label className={`${styles} flex flex-col`}>
-      <span className="ml-1">{label}</span>
+      <span className={`${labelStyles} ml-1`}>{label}</span>
       <input
         className={`${errorStyles} mt-1 rounded-sm text-gray-900 p-1`}
         name={inputName}

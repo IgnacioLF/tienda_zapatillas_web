@@ -57,7 +57,7 @@ const Register = () => {
   };
 
   return (
-    <div className="text-white mb-5">
+    <div className="text-white mb-9">
       <div
         id="purple_blur_top_left"
         className="absolute z-[0] top-[10%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
@@ -88,6 +88,7 @@ const Register = () => {
           >
             <InputLabel
               label={"Nombre"}
+              labelStyles={"font-bold"}
               styles="mt-3 w-full"
               inputType={"text"}
               inputName={"nombre"}
@@ -106,6 +107,7 @@ const Register = () => {
             ) : null}
             <InputLabel
               label={"Apellidos"}
+              labelStyles={"font-bold"}
               styles="mt-3 w-full"
               inputType={"text"}
               inputName={"apellidos"}
@@ -124,6 +126,7 @@ const Register = () => {
             ) : null}
             <InputLabel
               label={"Edad"}
+              labelStyles={"font-bold"}
               styles="mt-3 w-full"
               inputType={"number"}
               inputName={"edad"}
@@ -140,6 +143,7 @@ const Register = () => {
             ) : null}
             <InputLabel
               label={"Email"}
+              labelStyles={"font-bold"}
               styles="mt-3 w-full"
               inputType={"email"}
               inputName={"email"}
@@ -158,6 +162,7 @@ const Register = () => {
             ) : null}
             <InputLabel
               label={"Contraseña"}
+              labelStyles={"font-bold"}
               styles="mt-3 w-full"
               inputType={"password"}
               inputName={"password"}
@@ -176,6 +181,7 @@ const Register = () => {
             ) : null}
             <InputLabel
               label={"Repetir contraseña"}
+              labelStyles={"font-bold"}
               styles="mt-3 w-full"
               inputType={"password"}
               inputName={"confirmPassword"}
