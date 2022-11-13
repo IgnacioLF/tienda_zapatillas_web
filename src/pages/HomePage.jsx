@@ -126,6 +126,9 @@ const HomePage = () => {
             {ultimasZapatillas &&
               ultimasZapatillas.map((zapatilla, index) => {
                 const { id, modelo, precio } = zapatilla;
+                if (index > 3) {
+                  return null;
+                }
                 return (
                   <SliderCard
                     key={index}
