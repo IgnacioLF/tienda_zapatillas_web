@@ -31,10 +31,6 @@ const Tienda = () => {
         id="purple_blur_bottom_left"
         className="absolute z-[0] top-[150%] right-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
       />
-      <div
-        id="cyan_blur_middle_left"
-        className="absolute z-[0] left-[-10%] top-[220%] bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
-      />
       <div className="flex items-center justify-center">
         <span className="font-bold text-[2.7rem] mr-5">Buscador</span>
         <div className="flex  h-fit mt-2 text-[2rem] text-gray-900">
