@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import { obtenerZapatillaPorId } from "../api/ServicioZapatillas_Spring";
 import { SpringHost } from "../constants/constants";
 import PurpleButton from "../components/PurpleButton";
+import InputLabel from "../components/InputLabel";
 
 const ZapatillaDetalles = () => {
   const { zapatillaID } = useParams();
   const [zapatilla, setZapatilla] = useState(null);
+  const [cantidad, setCantidad] = useState(1);
 
   useEffect(() => {
     const obtenerZapatilla = async () => {
@@ -16,6 +18,10 @@ const ZapatillaDetalles = () => {
     };
     obtenerZapatilla();
   }, []);
+
+  const handleOnChangeCantidad = (e) => {
+    setCantidad(e.target.value);
+  };
 
   if (!zapatilla) return <div>Cargando...</div>;
 
@@ -37,16 +43,23 @@ const ZapatillaDetalles = () => {
       </div>
       <div className="min-w-[25rem] flex flex-col items-center justify-evenly bg-black-gradient-2 rounded-r-3xl">
         <h1 className="font-bold text-[3rem]">{zapatilla.modelo}</h1>
-        <div className="text-[1.3rem] text-gray-400">
+        <div className="text-[1.3rem] text-gray-300">
           <p>color : {zapatilla.color}</p>
           <p>marca : {zapatilla.marca}</p>
           <p>talla : {zapatilla.talla}</p>
           <p>sexo : {zapatilla.sexo}</p>
         </div>
         <h2 className="font-semibold text-[2rem]">{zapatilla.precio}$</h2>
+        <InputLabel
+          label={"Cantidad"}
+          styles={"mb-3"}
+          inputType={"number"}
+          inputValue={cantidad}
+          inputOnChange={handleOnChangeCantidad}
+        />
         <PurpleButton
           type={"button"}
-          styles={"font-bold text-[1.7rem] w-fit"}
+          styles={"font-bold text-[1.7rem] w-fit mb-2"}
           Click={() => alert("TODO")}
         >
           Comprar
