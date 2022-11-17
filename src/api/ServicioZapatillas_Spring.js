@@ -18,12 +18,11 @@ export const obtenerZapatillas = () => {
     });
 };
 
+// GET url..?id={idZapatilla} => {zapatilla}
 export const obtenerZapatillaPorId = (id) => {
-  const url = `${SpringHost}ServicioZapatillas/obtenerZapatillaPorId`;
-  const formData = new FormData();
-  formData.append("id", id);
+  const url = `${SpringHost}ServicioZapatillas/obtenerZapatillaPorId?id=${id}`;
 
-  return fetch(url, { method: "POST", body: formData })
+  return fetch(url)
     .then((response) => {
       console.log("response :", response);
       return response.json();
