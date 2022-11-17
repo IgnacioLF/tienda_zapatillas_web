@@ -17,6 +17,7 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+  const [userImage, setUserImage] = useState();
   const { errors, validateForm, onBlurField } = useSignUpValidator(form);
 
   const onUpdateField = (e) => {
@@ -36,6 +37,12 @@ const Register = () => {
     }
   };
 
+  const handleImageChange = (e) => {
+    if (e.target.files) {
+      setUserImage(e.target.files[0]);
+    }
+  };
+
   const onSubmitSignUp = async (e) => {
     setSubmitError("");
     e.preventDefault();
@@ -46,10 +53,11 @@ const Register = () => {
       form.password,
       form.email,
       form.edad,
-      form.apellidos
+      form.apellidos,
+      userImage
     );
     if (!response.ok) {
-      setSubmitError("Credenciales incorrectas");
+      setSubmitError("No se pudo realizar la operación");
       return;
     }
     // TODO change user session logged
@@ -200,6 +208,13 @@ const Register = () => {
                 message={errors.confirmPassword.message}
               />
             ) : null}
+            <span className="ml-1 mt-3 w-full font-bold">Foto de usuario</span>
+            <input
+              className="w-full mt-1"
+              type={"file"}
+              name="foto"
+              onChange={handleImageChange}
+            />
             {submitError ? (
               <ErrorDiv styles={"text-[0.8rem]"} message={submitError} />
             ) : null}
