@@ -1,15 +1,15 @@
 import { SpringHost } from "../constants/constants";
 
 // POST formData {email,password} => ok,nombreUsuario || 403
-export const inicioSesionUsuario = (email, pass) => {
+export const inicioSesionUsuario = async (email, pass) => {
   const url = `${SpringHost}ServicioWebUsuarios/identificarUsuario`;
   const formData = new FormData();
   formData.append("email", email);
   formData.append("pass", pass);
 
-  return fetch(url, { method: "POST", body: formData })
+  return await fetch(url, { method: "POST", body: formData })
     .then(async (res) => {
-      return res;
+      return res.text();
     })
     .catch((err) => {
       return err;

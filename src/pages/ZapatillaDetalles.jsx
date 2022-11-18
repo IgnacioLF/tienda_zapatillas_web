@@ -1,14 +1,23 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { obtenerZapatillaPorId } from "../api/ServicioZapatillas_Spring";
 import { SpringHost } from "../constants/constants";
 import PurpleButton from "../components/PurpleButton";
 import InputLabel from "../components/InputLabel";
+import ErrorDiv from "../components/ErrorDiv";
+import { userContext } from "../App";
+import { agregarZapatillaCarrito } from "../api/ServicioWebCarrito_Spring";
 
 const ZapatillaDetalles = () => {
+  const { userId } = useContext(userContext);
+  // TODO REMOVE
+  console.log("userid :", userId);
+
   const { zapatillaID } = useParams();
   const [zapatilla, setZapatilla] = useState(null);
   const [cantidad, setCantidad] = useState(1);
+  const [errorCantidad, setErrorCantidad] = useState(null);
+  const [notLoggedError, setNotLoggedError] = useState(null);
 
   useEffect(() => {
     const obtenerZapatilla = async () => {
@@ -21,6 +30,23 @@ const ZapatillaDetalles = () => {
 
   const handleOnChangeCantidad = (e) => {
     setCantidad(e.target.value);
+  };
+
+  const handleClickAddToCart = async () => {
+    setErrorCantidad(null);
+    setNotLoggedError(null);
+
+    if (cantidad < 1 || cantidad > 100) {
+      setErrorCantidad("La cantidad introduccida no es valida");
+    } else if (!userId) {
+      setNotLoggedError("Debes estar logeado para poder comprar");
+    }
+    const response = await agregarZapatillaCarrito(zapatillaID, cantidad);
+    if (!response.ok) {
+      console.log("error adding product to cart");
+    }
+    console.log("respuesta : ", response);
+    // TODO popup y redirect
   };
 
   if (!zapatilla) return <div>Cargando...</div>;
@@ -52,15 +78,21 @@ const ZapatillaDetalles = () => {
         <h2 className="font-semibold text-[2rem]">{zapatilla.precio}$</h2>
         <InputLabel
           label={"Cantidad"}
-          styles={"mb-3"}
           inputType={"number"}
           inputValue={cantidad}
           inputOnChange={handleOnChangeCantidad}
+          errorform={errorCantidad ? true : null}
         />
+        {errorCantidad ? (
+          <ErrorDiv styles={"text-[0.8rem]"} message={errorCantidad} />
+        ) : null}
+        {notLoggedError ? (
+          <ErrorDiv styles={"text-[0.8rem]"} message={notLoggedError} />
+        ) : null}
         <PurpleButton
           type={"button"}
-          styles={"font-bold text-[1.7rem] w-fit mb-2"}
-          Click={() => alert("TODO")}
+          styles={"font-bold text-[1.7rem] w-fit mb-2 mt-3"}
+          Click={handleClickAddToCart}
         >
           Comprar
         </PurpleButton>

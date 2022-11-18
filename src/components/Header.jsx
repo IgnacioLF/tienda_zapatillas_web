@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InputLabel from "./InputLabel";
 import OutlineButton from "./OutlineButton";
@@ -7,10 +7,15 @@ import { useSignInValidator } from "../customHooks/useSigninValidator";
 import ErrorDiv from "./ErrorDiv";
 import { inicioSesionUsuario } from "../api/ServicioWebUsuarios_Spring";
 import logoImage from "../assets/logo.png";
+import { SpringHost } from "../constants/constants";
+import { userContext } from "../App";
 
 const Header = () => {
   const [userDropdown, setUserDropdown] = useState(false);
   const navigate = useNavigate();
+
+  const [isLogged, setIsLogged] = useState(false);
+  const { userId, setUserId } = useContext(userContext);
 
   const [submitError, setSubmitError] = useState("");
   const [form, setForm] = useState({
@@ -55,11 +60,13 @@ const Header = () => {
     const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
     if (!isValid) return;
     const response = await inicioSesionUsuario(form.email, form.password);
-    if (!response.ok) {
+    if (!response.includes("ok")) {
       setSubmitError("Credenciales incorrectas");
       return;
     }
+    setUserId(response.split(",")[1]);
     // TODO login user
+    setIsLogged(true);
     alert("usuario logeado");
     console.log("usuario logeado");
   };
@@ -101,83 +108,94 @@ const Header = () => {
               </svg>
             </Link>
           </div>
-          <div className="mx-3">
-            <a onClick={handleUserClick}>
-              <svg
-                className="w-6 h-6 hover:text-purple-500"
-                fill="currentColor"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                ></path>
-              </svg>
-            </a>
-            {userDropdown && (
-              <div className="max-w-[15rem] flex flex-col justify-center items-center absolute bg-black-gradient-2 ml-[-6rem] p-3 rounded-lg mt-4 z-10">
-                <form
-                  onSubmit={onSubmitSignIn}
-                  className="flex flex-col justify-center items-center mb-3 mx-2"
+          {!isLogged ? (
+            <div className="mx-3">
+              <a onClick={handleUserClick}>
+                <svg
+                  className="w-6 h-6 hover:text-purple-500"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <InputLabel
-                    label={"Correo Electronico"}
-                    styles={"mb-1"}
-                    inputType={"email"}
-                    inputName={"email"}
-                    inputValue={form.email}
-                    inputOnChange={onUpdateField}
-                    inputOnBlur={onBlurField}
-                    errorform={
-                      errors.email.touched && errors.email.error ? true : null
-                    }
-                  />
-                  {errors.email.touched && errors.email.error ? (
-                    <ErrorDiv
-                      styles={"text-[0.8rem]"}
-                      message={errors.email.message}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  ></path>
+                </svg>
+              </a>
+              {userDropdown && (
+                <div className="max-w-[15rem] flex flex-col justify-center items-center absolute bg-black-gradient-2 ml-[-6rem] p-3 rounded-lg mt-4 z-10">
+                  <form
+                    onSubmit={onSubmitSignIn}
+                    className="flex flex-col justify-center items-center mb-3 mx-2"
+                  >
+                    <InputLabel
+                      label={"Correo Electronico"}
+                      styles={"mb-1"}
+                      inputType={"email"}
+                      inputName={"email"}
+                      inputValue={form.email}
+                      inputOnChange={onUpdateField}
+                      inputOnBlur={onBlurField}
+                      errorform={
+                        errors.email.touched && errors.email.error ? true : null
+                      }
                     />
-                  ) : null}
-                  <InputLabel
-                    label={"Contraseña"}
-                    styles={"mb-1 mt-2"}
-                    inputType={"password"}
-                    inputName={"password"}
-                    inputValue={form.password}
-                    inputOnBlur={onBlurField}
-                    inputOnChange={onUpdateField}
-                    errorform={
-                      errors.password.touched && errors.password.error
-                        ? true
-                        : null
-                    }
-                  />
-                  {errors.password.touched && errors.password.error ? (
-                    <ErrorDiv
-                      styles={"mb-2 text-[0.8rem]"}
-                      message={errors.password.message}
+                    {errors.email.touched && errors.email.error ? (
+                      <ErrorDiv
+                        styles={"text-[0.8rem]"}
+                        message={errors.email.message}
+                      />
+                    ) : null}
+                    <InputLabel
+                      label={"Contraseña"}
+                      styles={"mb-1 mt-2"}
+                      inputType={"password"}
+                      inputName={"password"}
+                      inputValue={form.password}
+                      inputOnBlur={onBlurField}
+                      inputOnChange={onUpdateField}
+                      errorform={
+                        errors.password.touched && errors.password.error
+                          ? true
+                          : null
+                      }
                     />
-                  ) : null}
-                  {submitError ? (
-                    <ErrorDiv
-                      styles={"mb-2 text-[0.8rem]"}
-                      message={submitError}
-                    />
-                  ) : null}
-                  <PurpleButton type="submit" styles={"mt-2"}>
-                    Iniciar sesión
-                  </PurpleButton>
-                </form>
-                <OutlineButton type="button" Click={handleRegisterClick}>
-                  Registrarse
-                </OutlineButton>
-              </div>
-            )}
-          </div>
+                    {errors.password.touched && errors.password.error ? (
+                      <ErrorDiv
+                        styles={"mb-2 text-[0.8rem]"}
+                        message={errors.password.message}
+                      />
+                    ) : null}
+                    {submitError ? (
+                      <ErrorDiv
+                        styles={"mb-2 text-[0.8rem]"}
+                        message={submitError}
+                      />
+                    ) : null}
+                    <PurpleButton type="submit" styles={"mt-2"}>
+                      Iniciar sesión
+                    </PurpleButton>
+                  </form>
+                  <OutlineButton type="button" Click={handleRegisterClick}>
+                    Registrarse
+                  </OutlineButton>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="mx-3">
+              <a>
+                <img
+                  className="h-6 w-6"
+                  src={`${SpringHost}/subidas/u${userId}.png`}
+                />
+              </a>
+            </div>
+          )}
           <div className="mx-3">
             <PurpleButton type={"button"} Click={() => navigate("/tienda")}>
               Comprar
