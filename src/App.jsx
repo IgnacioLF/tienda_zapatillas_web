@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -9,11 +9,17 @@ import Register from "./pages/Register";
 import SobreNosotros from "./pages/SobreNosotros";
 import Tienda from "./pages/Tienda";
 import ZapatillaDetalles from "./pages/ZapatillaDetalles";
+import Cookies from "universal-cookie";
 
 export const userContext = createContext();
 
 function App() {
-  const [userId, setUserId] = useState(null);
+  const cookies = new Cookies();
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    setUserId(cookies.get("user"));
+  }, []);
 
   const userData = { userId, setUserId };
 

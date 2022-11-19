@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InputLabel from "./InputLabel";
 import OutlineButton from "./OutlineButton";
@@ -13,14 +13,22 @@ import {
 import logoImage from "../assets/logo.png";
 import { SpringHost } from "../constants/constants";
 import { userContext } from "../App";
+import Cookies from "universal-cookie";
 
 const Header = () => {
+  const cookies = new Cookies();
   const [userDropdown, setUserDropdown] = useState(false);
   const [userDetailDropdonw, setUserDetailDropdown] = useState(false);
   const navigate = useNavigate();
 
   const [isLogged, setIsLogged] = useState(false);
   const { userId, setUserId } = useContext(userContext);
+
+  useEffect(() => {
+    if (cookies.get("user") !== "") {
+      setIsLogged(true);
+    }
+  }, []);
 
   const [submitError, setSubmitError] = useState("");
   const [form, setForm] = useState({
@@ -70,6 +78,7 @@ const Header = () => {
       return;
     }
     setUserId(response.split(",")[1]);
+    cookies.set("user", `${response.split(",")[1]}`, { path: "/" });
     // TODO login user
     setIsLogged(true);
     console.log("usuario logeado");
@@ -89,6 +98,7 @@ const Header = () => {
     if (resp.ok) {
       setUserDetailDropdown(false);
       setUserId("");
+      cookies.set("user", "", { path: "/" });
       setIsLogged(false);
       setUserDropdown(false);
       setForm({
