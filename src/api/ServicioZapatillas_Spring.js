@@ -36,3 +36,21 @@ export const obtenerZapatillaPorId = (id) => {
       return null;
     });
 };
+
+export const obtenerZapatillasBuscador = (modelo) => {
+  const url = `${SpringHost}ServicioZapatillas/obtenerZapatillas?modelo=${modelo}`;
+
+  return fetch(url)
+    .then((response) => {
+      console.log("response :", response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log("data :", data);
+      return data;
+    })
+    .catch((err) => {
+      console.log("error obteniendo zaptilla", err);
+      return null;
+    });
+};

@@ -51,3 +51,15 @@ export const registrarUsuario = (
       return err;
     });
 };
+
+export const userLogOut = () => {
+  const url = `${SpringHost}ServicioWebUsuarios/logout`;
+
+  return fetch(url)
+    .then(async (res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};

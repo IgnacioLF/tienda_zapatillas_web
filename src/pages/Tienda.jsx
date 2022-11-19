@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { obtenerZapatillas } from "../api/ServicioZapatillas_Spring";
+import {
+  obtenerZapatillas,
+  obtenerZapatillasBuscador,
+} from "../api/ServicioZapatillas_Spring";
 import ZapatillaCard from "../components/ZapatillaCard";
 
 const Tienda = () => {
   const [zapatillas, setZapatillas] = useState(null);
+  const [buscadorData, setBuscadorData] = useState("");
+
   useEffect(() => {
     const getZapatillas = async () => {
       const res = await obtenerZapatillas();
@@ -11,6 +16,19 @@ const Tienda = () => {
     };
     getZapatillas();
   }, []);
+
+  const handleOnClickBuscador = () => {
+    getZapatillas();
+  };
+
+  const getZapatillas = async () => {
+    const res = await obtenerZapatillasBuscador(buscadorData);
+    setZapatillas(res);
+  };
+
+  const handleOnChangeBuscador = (e) => {
+    setBuscadorData(e.target.value);
+  };
 
   console.log("zapatillas ", zapatillas);
   return (
@@ -25,11 +43,7 @@ const Tienda = () => {
       />
       <div
         id="cyan_blur_middle_left"
-        className="absolute z-[0] left-[-10%] top-[110%] bottom-0 w-[20%] h-[20%] cyan__gradient rounded-full"
-      />
-      <div
-        id="purple_blur_bottom_left"
-        className="absolute z-[0] top-[150%] right-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
+        className="absolute z-[0] left-[-10%] top-[82%] bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
       />
       <div className="flex items-center justify-center">
         <span className="font-bold text-[2.7rem] mr-5">Buscador</span>
@@ -39,9 +53,11 @@ const Tienda = () => {
             id="buscador"
             name="buscador"
             className="rounded-l-xl pl-2"
+            value={buscadorData}
+            onChange={handleOnChangeBuscador}
           />
           <a
-            onClick={() => alert("TODO")}
+            onClick={handleOnClickBuscador}
             className="bg-gradient-to-r from-purple-600 to-cyan-500 flex items-center px-2 rounded-r-xl text-white hover:text-purple-500 border-2 border-transparent bg-origin-border hover:border-white"
           >
             <svg
@@ -59,7 +75,7 @@ const Tienda = () => {
           </a>
         </div>
       </div>
-      <div className="w-full grid grid-cols-3 items-center justify-center mr-10 max-w-[60%]">
+      <div className="w-full grid grid-cols-3 justify-center mr-10 max-w-[60%] min-h-[65vh]">
         {zapatillas &&
           zapatillas.map((zapatilla, index) => {
             const { id, modelo, precio } = zapatilla;
