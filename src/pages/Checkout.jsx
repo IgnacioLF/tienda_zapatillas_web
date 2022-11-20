@@ -2,11 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../App";
 import { obtenerCarrito } from "../api/ServicioWebCarrito_Spring";
+import CheckoutPaso1 from "../components/CheckoutPaso1";
+import CheckoutPaso2 from "../components/CheckoutPaso2";
+import CheckoutPaso3 from "../components/CheckoutPaso3";
+import ResumenPedido from "../components/ResumenPedido";
 
 const Checkout = () => {
   const navigate = useNavigate();
   const { userId } = useContext(userContext);
   const [pasoCheckout, setPasoCheckout] = useState(1);
+  const [resumenPedido, setResumenPedido] = useState(null);
 
   useEffect(() => {
     if (userId === "") {
@@ -24,16 +29,77 @@ const Checkout = () => {
   }, [userId]);
 
   if (pasoCheckout === 1) {
-    return <div className="text-white">Paso 1</div>;
+    return (
+      <div className="text-white min-h-[68vh]">
+        <div
+          id="purple_blur_top_left"
+          className="absolute z-[0] top-[10%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
+        />
+        <div
+          id="cyan_blur_top_left"
+          className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
+        />
+        <CheckoutPaso1 goToPaso2={() => setPasoCheckout(2)} />
+      </div>
+    );
   }
   if (pasoCheckout === 2) {
-    return <div className="text-white">Paso 2</div>;
+    return (
+      <div className="text-white min-h-[68vh]">
+        <div
+          id="purple_blur_top_left"
+          className="absolute z-[0] top-[10%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
+        />
+        <div
+          id="cyan_blur_top_left"
+          className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
+        />
+        <CheckoutPaso2 goToPaso3={() => setPasoCheckout(3)} />
+      </div>
+    );
   }
   if (pasoCheckout === 3) {
-    return <div className="text-white">Paso 3</div>;
+    return (
+      <div className="text-white min-h-[68vh]">
+        <div
+          id="purple_blur_top_left"
+          className="absolute z-[0] top-[10%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
+        />
+        <div
+          id="cyan_blur_top_left"
+          className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
+        />
+        <CheckoutPaso3
+          goToDetallesPedido={(resumen) => {
+            setResumenPedido(resumen);
+            setPasoCheckout(4);
+          }}
+        />
+      </div>
+    );
   }
-  // TODO check
-  return <div className="text-white">Esto es el Checkout</div>;
+
+  console.log("resumen pedido ", resumenPedido);
+
+  if (pasoCheckout === 4) {
+    return (
+      <div className="text-white min-h-[68vh] mx-[10rem]">
+        <div
+          id="purple_blur_top_left"
+          className="absolute z-[0] top-[10%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
+        />
+        <div
+          id="cyan_blur_top_left"
+          className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
+        />
+        <div
+          id="cyan_blur_middle_left"
+          className="absolute z-[0] left-[-10%] top-[82%] bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
+        />
+        <ResumenPedido pedidoData={resumenPedido} />
+      </div>
+    );
+  }
 };
 
 export default Checkout;

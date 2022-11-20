@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { userContext } from "../App";
 import { obtenerCarrito } from "../api/ServicioWebCarrito_Spring";
+import emptyCart from "../assets/emptyCart.png";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -34,6 +35,29 @@ const Cart = () => {
       navigate("/checkout");
     }
   };
+
+  if (cartData && cartData.length === 0) {
+    return (
+      <div className="w-full flex flex-col items-center min-h-[71vh]">
+        <div
+          id="purple_blur_top_left"
+          className="absolute z-[0] top-[0%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
+        />
+        <div
+          id="cyan_blur_top_right"
+          className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
+        />
+        <div
+          id="cyan_blur_middle_left"
+          className="absolute z-[0] left-[-10%] top-[82%] bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
+        />
+        <p className="text-white text-[1.5rem] mt-10 mb-5">
+          El carrito esta vacio, puedes añadir productos en nuestra tienda
+        </p>
+        <img src={emptyCart} className="w-[35rem] h-[30rem]" />
+      </div>
+    );
+  }
 
   return (
     <div className="text-white flex justify-center">

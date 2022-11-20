@@ -41,7 +41,11 @@ const ZapatillaDetalles = () => {
     } else if (!userId) {
       setNotLoggedError("Debes estar logeado para poder comprar");
     }
-    const response = await agregarZapatillaCarrito(zapatillaID, cantidad);
+    const response = await agregarZapatillaCarrito(
+      zapatillaID,
+      cantidad,
+      userId
+    );
     if (!response.ok) {
       console.log("error adding product to cart");
     }
