@@ -15,3 +15,21 @@ export const agregarZapatillaCarrito = async (id, cantidad) => {
       return err;
     });
 };
+
+// GET
+export const obtenerCarrito = (userId) => {
+  const url = `${SpringHost}ServicioWebCarrito/obtenerProductosCarrito?userId=${userId}`;
+
+  return fetch(url)
+    .then((response) => {
+      console.log("response :", response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log("data :", data);
+      return data;
+    })
+    .catch((error) => {
+      console.log("error :", error);
+    });
+};

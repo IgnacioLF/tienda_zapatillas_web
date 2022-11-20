@@ -10,12 +10,13 @@ import SobreNosotros from "./pages/SobreNosotros";
 import Tienda from "./pages/Tienda";
 import ZapatillaDetalles from "./pages/ZapatillaDetalles";
 import Cookies from "universal-cookie";
+import Checkout from "./pages/Checkout";
 
 export const userContext = createContext();
 
 function App() {
   const cookies = new Cookies();
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     setUserId(cookies.get("user"));
@@ -38,6 +39,7 @@ function App() {
             path="/zapatilla/:zapatillaID"
             element={<ZapatillaDetalles />}
           />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </userContext.Provider>

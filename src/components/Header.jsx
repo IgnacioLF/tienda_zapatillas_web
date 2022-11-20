@@ -25,7 +25,11 @@ const Header = () => {
   const { userId, setUserId } = useContext(userContext);
 
   useEffect(() => {
-    if (cookies.get("user") !== "") {
+    if (
+      cookies.get("user") !== "" &&
+      cookies.get("user") !== undefined &&
+      cookies.get("user") !== null
+    ) {
       setIsLogged(true);
     }
   }, []);
