@@ -1,38 +1,44 @@
 import { useEffect, useState } from "react";
-import {
-  obtenerZapatillas,
-  obtenerZapatillasBuscador,
-} from "../api/ServicioZapatillas_Spring";
+import { obtenerZapatillasBuscador } from "../api/ServicioZapatillas_Spring";
+import PurpleButton from "../components/PurpleButton";
 import ZapatillaCard from "../components/ZapatillaCard";
+import OutlineButton from "../components/OutlineButton";
 
 const Tienda = () => {
   const [zapatillas, setZapatillas] = useState(null);
   const [buscadorData, setBuscadorData] = useState("");
-
-  useEffect(() => {
-    const getZapatillas = async () => {
-      const res = await obtenerZapatillas();
-      setZapatillas(res);
-    };
-    getZapatillas();
-  }, []);
-
-  const handleOnClickBuscador = () => {
-    getZapatillas();
-  };
+  const [totalZapatillas, setTotalZapatillas] = useState(0);
+  const [comienzo, setComienzo] = useState(0);
 
   const getZapatillas = async () => {
-    const res = await obtenerZapatillasBuscador(buscadorData);
-    setZapatillas(res);
+    const res = await obtenerZapatillasBuscador(buscadorData, comienzo);
+    setTotalZapatillas(res.total);
+    setZapatillas(res.zapatillas);
+  };
+  useEffect(() => {
+    getZapatillas();
+  }, [comienzo]);
+
+  const handleOnClickBuscador = () => {
+    setComienzo(0);
+    getZapatillas();
   };
 
   const handleOnChangeBuscador = (e) => {
     setBuscadorData(e.target.value);
   };
 
+  const handleOnClickAtras = () => {
+    setComienzo(comienzo - 6);
+  };
+
+  const handleOnClickSiguiente = () => {
+    setComienzo(comienzo + 6);
+  };
+
   console.log("zapatillas ", zapatillas);
   return (
-    <div className="text-white flex flex-col justify-center items-center">
+    <div className="text-white flex flex-col justify-center items-center mb-10">
       <div
         id="purple_blur_top_left"
         className="absolute z-[0] top-[0%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
@@ -75,7 +81,7 @@ const Tienda = () => {
           </a>
         </div>
       </div>
-      <div className="w-full grid grid-cols-3 justify-center mr-10 max-w-[60%] min-h-[65vh]">
+      <div className="w-full grid grid-cols-3 justify-center mr-3 max-w-[60%] min-h-[65vh]">
         {zapatillas &&
           zapatillas.map((zapatilla, index) => {
             const { id, modelo, precio } = zapatilla;
@@ -88,6 +94,18 @@ const Tienda = () => {
               />
             );
           })}
+      </div>
+      <div className="w-full flex justify-evenly ml-[4rem] max-w-[60%]">
+        {comienzo > 0 && (
+          <OutlineButton styles={"font-bold"} Click={handleOnClickAtras}>
+            Atras
+          </OutlineButton>
+        )}
+        {totalZapatillas > 12 && totalZapatillas - comienzo > 6 && (
+          <PurpleButton styles={"font-bold"} Click={handleOnClickSiguiente}>
+            Siguiente
+          </PurpleButton>
+        )}
       </div>
     </div>
   );

@@ -37,8 +37,8 @@ export const obtenerZapatillaPorId = (id) => {
     });
 };
 
-export const obtenerZapatillasBuscador = (modelo) => {
-  const url = `${SpringHost}ServicioZapatillas/obtenerZapatillas?modelo=${modelo}`;
+export const obtenerZapatillasBuscador = (modelo, comienzo) => {
+  const url = `${SpringHost}ServicioZapatillas/obtenerZapatillas?modelo=${modelo}&comienzo=${comienzo}`;
 
   return fetch(url)
     .then((response) => {
