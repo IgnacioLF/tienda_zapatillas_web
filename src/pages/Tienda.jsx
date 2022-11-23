@@ -101,7 +101,7 @@ const Tienda = () => {
             Atras
           </OutlineButton>
         )}
-        {totalZapatillas > 12 && totalZapatillas - comienzo > 6 && (
+        {totalZapatillas > 6 && totalZapatillas - comienzo > 6 && (
           <PurpleButton styles={"font-bold"} Click={handleOnClickSiguiente}>
             Siguiente
           </PurpleButton>

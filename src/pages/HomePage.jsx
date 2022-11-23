@@ -12,7 +12,7 @@ const HomePage = () => {
   useEffect(() => {
     const getUltimasZapatillas = async () => {
       const res = await obtenerZapatillas();
-      setUltimasZapatillas(res);
+      setUltimasZapatillas(res.zapatillas);
     };
     getUltimasZapatillas();
   }, []);

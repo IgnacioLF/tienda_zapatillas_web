@@ -36,7 +36,7 @@ const Cart = () => {
     }
   };
 
-  if (cartData && cartData.length === 0) {
+  if (cartData === null || cartData.length === 0) {
     return (
       <div className="w-full flex flex-col items-center min-h-[71vh]">
         <div
