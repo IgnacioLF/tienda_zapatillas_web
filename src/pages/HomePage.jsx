@@ -3,7 +3,7 @@ import zapatilla1 from "../assets/zapatilla1.png";
 import zapatillaCaja from "../assets/zapatillas-caja.png";
 import SliderCard from "../components/SliderCard";
 import { useEffect, useState } from "react";
-import { obtenerZapatillas } from "../api/ServicioZapatillas_Spring";
+import { obtenerUltimasZapatillas } from "../api/ServicioZapatillas_Spring";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -11,8 +11,8 @@ const HomePage = () => {
   const [ultimasZapatillas, setUltimasZapatillas] = useState();
   useEffect(() => {
     const getUltimasZapatillas = async () => {
-      const res = await obtenerZapatillas();
-      setUltimasZapatillas(res.zapatillas);
+      const res = await obtenerUltimasZapatillas();
+      setUltimasZapatillas(res);
     };
     getUltimasZapatillas();
   }, []);

@@ -54,3 +54,21 @@ export const obtenerZapatillasBuscador = (modelo, comienzo) => {
       return null;
     });
 };
+
+// GET
+export const obtenerUltimasZapatillas = () => {
+  const url = `${SpringHost}ServicioZapatillas/obtenerUltimasZapatillas`;
+
+  return fetch(url)
+    .then((response) => {
+      console.log("response :", response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log("data :", data);
+      return data;
+    })
+    .catch((error) => {
+      console.log("error :", error);
+    });
+};
