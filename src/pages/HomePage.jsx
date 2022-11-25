@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const navigate = useNavigate();
   const [ultimasZapatillas, setUltimasZapatillas] = useState();
+  const [finalSlider, setFinalSlider] = useState(4);
+  const [principioSlider, setPrincipioSLider] = useState(1);
+
   useEffect(() => {
     const getUltimasZapatillas = async () => {
       const res = await obtenerUltimasZapatillas();
@@ -16,6 +19,34 @@ const HomePage = () => {
     };
     getUltimasZapatillas();
   }, []);
+
+  const handleNextSlider = () => {
+    if (finalSlider === 8) {
+      setFinalSlider(1);
+    } else {
+      setFinalSlider(finalSlider + 1);
+    }
+
+    if (principioSlider === 8) {
+      setPrincipioSLider(1);
+    } else {
+      setPrincipioSLider(principioSlider + 1);
+    }
+  };
+
+  const handleBackSlider = () => {
+    if (finalSlider === 1) {
+      setFinalSlider(8);
+    } else {
+      setFinalSlider(finalSlider - 1);
+    }
+
+    if (principioSlider === 1) {
+      setPrincipioSLider(8);
+    } else {
+      setPrincipioSLider(principioSlider - 1);
+    }
+  };
 
   const handleClickComprarlasYa = () => {
     navigate("/tienda");
@@ -83,7 +114,7 @@ const HomePage = () => {
             </h2>
             <div className="flex">
               <a
-                onClick={() => alert("TODO")}
+                onClick={handleBackSlider}
                 className="rounded-lg mr-2 px-2 py-2 bg-gray-600 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-gray-300"
               >
                 <svg
@@ -102,7 +133,7 @@ const HomePage = () => {
                 </svg>
               </a>
               <a
-                onClick={() => alert("TODO")}
+                onClick={handleNextSlider}
                 className="rounded-lg px-2 py-2 bg-gradient-to-r from-purple-600 to-cyan-500 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-gray-300"
               >
                 <svg
@@ -126,9 +157,19 @@ const HomePage = () => {
             {ultimasZapatillas &&
               ultimasZapatillas.map((zapatilla, index) => {
                 const { id, modelo, precio } = zapatilla;
-                if (index > 3) {
-                  return null;
+                const pos = index + 1;
+                let retrunCard = false;
+                if (principioSlider >= 6) {
+                  if (
+                    (pos >= principioSlider && pos <= 8) ||
+                    pos <= finalSlider
+                  ) {
+                    retrunCard = true;
+                  }
+                } else if (pos >= principioSlider && pos <= finalSlider) {
+                  retrunCard = true;
                 }
+                if (!retrunCard) return null;
                 return (
                   <SliderCard
                     key={index}
