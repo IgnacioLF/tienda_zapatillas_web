@@ -54,7 +54,7 @@ const CheckoutPaso1 = ({ goToPaso2 }) => {
   };
 
   return (
-    <div className="rounded-xl mx-auto w-fit  mt-10 p-[3px] bg-gradient-to-r from-purple-600 to-cyan-500">
+    <div className="rounded-xl mx-auto w-fit  mt-10 p-[3px] bg-gradient-to-r from-purple-600 to-cyan-500 mb-10">
       <div className="flex flex-col items-center w-fit justify-between h-full bg-black-gradient-2 text-white rounded-lg p-6">
         <div className="flex items-center">
           <svg

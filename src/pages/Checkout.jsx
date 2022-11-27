@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../App";
@@ -6,6 +7,9 @@ import CheckoutPaso1 from "../components/CheckoutPaso1";
 import CheckoutPaso2 from "../components/CheckoutPaso2";
 import CheckoutPaso3 from "../components/CheckoutPaso3";
 import ResumenPedido from "../components/ResumenPedido";
+import CheckOutProgres_Paso1 from "../assets/checkout_Paso1.png";
+import CheckOutProgres_Paso2 from "../assets/checkout_Paso2.png";
+import CheckOutProgres_Paso3 from "../assets/checkout_Paso3.png";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -39,13 +43,14 @@ const Checkout = () => {
           id="cyan_blur_top_left"
           className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
         />
+        <img src={CheckOutProgres_Paso1} className="h-[7rem] m-auto pl-6" />
         <CheckoutPaso1 goToPaso2={() => setPasoCheckout(2)} />
       </div>
     );
   }
   if (pasoCheckout === 2) {
     return (
-      <div className="text-white min-h-[68vh]">
+      <div className="text-white min-h-[72vh]">
         <div
           id="purple_blur_top_left"
           className="absolute z-[0] top-[10%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
@@ -54,13 +59,14 @@ const Checkout = () => {
           id="cyan_blur_top_left"
           className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
         />
+        <img src={CheckOutProgres_Paso2} className="h-[7rem] m-auto pl-6" />
         <CheckoutPaso2 goToPaso3={() => setPasoCheckout(3)} />
       </div>
     );
   }
   if (pasoCheckout === 3) {
     return (
-      <div className="text-white min-h-[68vh]">
+      <div className="text-white min-h-[72vh]">
         <div
           id="purple_blur_top_left"
           className="absolute z-[0] top-[10%] left-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
@@ -69,6 +75,7 @@ const Checkout = () => {
           id="cyan_blur_top_left"
           className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
         />
+        <img src={CheckOutProgres_Paso3} className="h-[7rem] m-auto pl-6" />
         <CheckoutPaso3
           goToDetallesPedido={(resumen) => {
             setResumenPedido(resumen);
