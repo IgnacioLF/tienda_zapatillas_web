@@ -34,3 +34,16 @@ export const obtenerCarrito = (userId) => {
       console.log("error :", error);
     });
 };
+
+// GET
+export const borrarProductoCarrito = (userId, idProducto) => {
+  const url = `${SpringHost}ServicioWebCarrito/borrarProductoCarrito?userId=${userId}&idProducto=${idProducto}`;
+
+  return fetch(url)
+    .then(async (res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};

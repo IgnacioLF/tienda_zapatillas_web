@@ -6,7 +6,10 @@ import PurpleButton from "../components/PurpleButton";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { userContext } from "../App";
-import { obtenerCarrito } from "../api/ServicioWebCarrito_Spring";
+import {
+  borrarProductoCarrito,
+  obtenerCarrito,
+} from "../api/ServicioWebCarrito_Spring";
 import emptyCart from "../assets/emptyCart.png";
 
 const Cart = () => {
@@ -14,14 +17,15 @@ const Cart = () => {
   const { userId } = useContext(userContext);
   const [cartData, setCartData] = useState(null);
 
+  const getCarrito = async () => {
+    const res = await obtenerCarrito(userId);
+    setCartData(res);
+  };
+
   useEffect(() => {
     if (userId === "") {
       navigate("/");
     } else if (userId !== null && userId !== undefined) {
-      const getCarrito = async () => {
-        const res = await obtenerCarrito(userId);
-        setCartData(res);
-      };
       getCarrito();
     }
   }, [userId]);
@@ -34,6 +38,16 @@ const Cart = () => {
     if (cartData.length > 0 && cartData !== null) {
       navigate("/checkout");
     }
+  };
+
+  const handleOnClickBorrar = async (idProducto) => {
+    const response = await borrarProductoCarrito(userId, idProducto);
+    if (!response.ok) {
+      console.log("error deleting product from cart ", response);
+      return;
+    }
+    console.log("responese ok delete cart", response);
+    getCarrito();
   };
 
   if (cartData === null || cartData.length === 0) {
@@ -111,7 +125,9 @@ const Cart = () => {
                     </td>
                     <td className="px-4 py-3">{precio}$</td>
                     <td className="px-4 py-3">
-                      <RedButton Click={() => alert("TODO")}>
+                      <RedButton
+                        Click={() => handleOnClickBorrar(zapatilla_id)}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
