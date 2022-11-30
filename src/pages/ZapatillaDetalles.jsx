@@ -68,6 +68,7 @@ const ZapatillaDetalles = () => {
       <div className="flex justify-center items-center bg-opacity-100 bg-gradient-to-r from-[#2b1046] to-[#003741] rounded-l-3xl max-h-[40rem]">
         <img
           className="w-[30rem] h-[30rem] mb-2"
+          alt="imagen zapatilla"
           src={`${SpringHost}/subidas/${zapatilla.id}.png`}
         />
       </div>

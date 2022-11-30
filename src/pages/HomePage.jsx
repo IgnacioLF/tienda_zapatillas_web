@@ -94,7 +94,11 @@ const HomePage = () => {
           </PurpleButton>
         </div>
         <div className="">
-          <img src={zapatilla1} className="h-[35rem] rotate-17" />
+          <img
+            src={zapatilla1}
+            className="h-[35rem] rotate-17"
+            alt="imagen zapatilla"
+          />
         </div>
       </section>
       <section
@@ -252,7 +256,11 @@ const HomePage = () => {
           <div className="min-w-[34.5rem] flex flex-col justify-center items-center">
             <div className="ml-[3.5rem]">
               <div className="p-[2rem] rounded-t-3xl h-fit bg-gradient-to-r from-[#2b1046] to-[#003741]">
-                <img src={zapatillaCaja} className="h-[15rem]" />
+                <img
+                  src={zapatillaCaja}
+                  className="h-[15rem]"
+                  alt="imagen zapatilla"
+                />
               </div>
               <div className="bg-gradient-to-r from-purple-600 to-cyan-500 pb-3 rounded-b-3xl">
                 <h3 className="mx-4 font-semibold pt-2 text-[1.6rem]">

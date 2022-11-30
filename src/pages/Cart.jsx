@@ -68,7 +68,11 @@ const Cart = () => {
         <p className="text-white text-[1.5rem] mt-10 mb-5">
           El carrito esta vacio, puedes añadir productos en nuestra tienda
         </p>
-        <img src={emptyCart} className="w-[35rem] h-[30rem]" />
+        <img
+          src={emptyCart}
+          className="w-[35rem] h-[30rem]"
+          alt="imagen zapatilla"
+        />
       </div>
     );
   }
@@ -113,6 +117,7 @@ const Cart = () => {
                       <img
                         src={`${SpringHost}/subidas/${zapatilla_id}.png`}
                         className="h-[100px] w-[100px]"
+                        alt="imagen zapatilla"
                       />
                     </td>
                     <td className="px-4 py-3">{modelo}</td>

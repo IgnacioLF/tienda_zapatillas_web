@@ -43,7 +43,11 @@ const Checkout = () => {
           id="cyan_blur_top_left"
           className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
         />
-        <img src={CheckOutProgres_Paso1} className="h-[7rem] m-auto pl-6" />
+        <img
+          src={CheckOutProgres_Paso1}
+          className="h-[7rem] m-auto pl-6"
+          alt="progreso paso1"
+        />
         <CheckoutPaso1 goToPaso2={() => setPasoCheckout(2)} />
       </div>
     );
@@ -59,7 +63,11 @@ const Checkout = () => {
           id="cyan_blur_top_left"
           className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
         />
-        <img src={CheckOutProgres_Paso2} className="h-[7rem] m-auto pl-6" />
+        <img
+          src={CheckOutProgres_Paso2}
+          className="h-[7rem] m-auto pl-6"
+          alt="progreso paso2"
+        />
         <CheckoutPaso2 goToPaso3={() => setPasoCheckout(3)} />
       </div>
     );
@@ -75,7 +83,11 @@ const Checkout = () => {
           id="cyan_blur_top_left"
           className="absolute z-[0] top-[40%] right-0 bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
         />
-        <img src={CheckOutProgres_Paso3} className="h-[7rem] m-auto pl-6" />
+        <img
+          src={CheckOutProgres_Paso3}
+          className="h-[7rem] m-auto pl-6"
+          alt="progreso paso 3"
+        />
         <CheckoutPaso3
           goToDetallesPedido={(resumen) => {
             setResumenPedido(resumen);

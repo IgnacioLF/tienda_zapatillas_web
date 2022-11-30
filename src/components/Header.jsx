@@ -119,7 +119,7 @@ const Header = () => {
       <nav className="w-full max-w-[70%] flex justify-around items-center py-5 text-white font-semibold">
         <div className="ml-10">
           <Link to={"/"}>
-            <img src={logoImage} className="h-[3rem]" />
+            <img src={logoImage} className="h-[3rem]" alt="logo" />
           </Link>
         </div>
         <div className="ml-10">

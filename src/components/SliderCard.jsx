@@ -13,6 +13,7 @@ const SliderCard = ({ idZapatilla, modelo, precio }) => {
         <img
           className="w-[13rem] h-[13rem] mb-2"
           src={`${SpringHost}/subidas/${idZapatilla}.png`}
+          alt="imagen zapatillas"
         />
       </div>
       <div className="mt-1 ml-4 mr-3">

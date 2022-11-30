@@ -14,6 +14,7 @@ const ZapatillaCard = ({ idZapatilla, modelo, precio, styles }) => {
         <img
           className="w-[16.4rem] h-[16.4rem] mb-2"
           src={`${SpringHost}/subidas/${idZapatilla}.png`}
+          alt="imagen zapatilla"
         />
       </div>
       <div className="pt-2 pl-4 pr-3 pb-4 bg-black-gradient-2 rounded-b-lg">

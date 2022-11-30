@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="flex flex-col justify-center items-center">
           <h2 className="py-4">
             <Link to={"/"}>
-              <img src={logoImage} className="h-[3rem]" />
+              <img src={logoImage} className="h-[3rem]" alt="logo" />
             </Link>
           </h2>
           <div className="flex mb-4">

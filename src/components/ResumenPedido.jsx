@@ -63,6 +63,7 @@ const ResumenPedido = ({ pedidoData }) => {
                     <img
                       src={`${SpringHost}/subidas/${zapatilla_id}.png`}
                       className="h-[60px] w-[60px]"
+                      alt="imagen de zapatilla"
                     />
                   </td>
                   <td className="px-4 py-3">{modelo}</td>
