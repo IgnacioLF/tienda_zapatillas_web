@@ -131,9 +131,6 @@ const Header = () => {
               <Link to={"/tienda"}>Productos</Link>
             </li>
             <li className="mx-3 transition-all hover:text-purple-500">
-              <Link to={"/sobre_nosotros"}>Sobre nosotros</Link>
-            </li>
-            <li className="mx-3 transition-all hover:text-purple-500">
               <Link to={"/contacto"}>Contacto</Link>
             </li>
           </ul>
