@@ -83,7 +83,6 @@ const Header = () => {
     }
     setUserId(response.split(",")[1]);
     cookies.set("user", `${response.split(",")[1]}`, { path: "/" });
-    // TODO login user
     setIsLogged(true);
     console.log("usuario logeado");
   };
@@ -116,7 +115,7 @@ const Header = () => {
 
   return (
     <header className="flex justify-center">
-      <nav className="w-full max-w-[70%] flex justify-around items-center py-5 text-white font-semibold">
+      <nav className="w-full lg:max-w-[70%] flex justify-around items-center py-5 text-white font-semibold">
         <div className="ml-10">
           <Link to={"/"}>
             <img src={logoImage} className="h-[3rem]" alt="logo" />

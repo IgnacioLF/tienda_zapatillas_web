@@ -5,12 +5,21 @@ import SliderCard from "../components/SliderCard";
 import { useEffect, useState } from "react";
 import { obtenerUltimasZapatillas } from "../api/ServicioZapatillas_Spring";
 import { useNavigate } from "react-router-dom";
+import useWindowDimensions from "../customHooks/useWindowDimensions";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [ultimasZapatillas, setUltimasZapatillas] = useState();
   const [finalSlider, setFinalSlider] = useState(4);
   const [principioSlider, setPrincipioSLider] = useState(1);
+  const { width } = useWindowDimensions();
+  let cont = 0;
+  let maxSlider = 4;
+  if (width < 1200 && width > 980) {
+    maxSlider = 3;
+  } else if (width < 980) {
+    maxSlider = 2;
+  }
 
   useEffect(() => {
     const getUltimasZapatillas = async () => {
@@ -70,7 +79,10 @@ const HomePage = () => {
         id="purple_blur_bottom_left"
         className="absolute z-[0] top-[150%] right-0 bottom-0 w-[20%] h-[20%] purple__gradient rounded-full"
       />
-      <section id="nueva_coleccion" className="flex mx-[10rem] justify-center">
+      <section
+        id="nueva_coleccion"
+        className="flex xl:mx-[10%] mx-[5%] justify-center flex-col items-center xl:flex-row "
+      >
         <div className="mr-6 flex flex-col justify-center mt-4 max-w-[25rem]">
           <h1 className="font-bold text-white text-[4rem] leading-[1.2]">
             Colección
@@ -93,7 +105,7 @@ const HomePage = () => {
             Compralas Ya
           </PurpleButton>
         </div>
-        <div className="">
+        <div>
           <img
             src={zapatilla1}
             className="h-[35rem] rotate-17"
@@ -119,7 +131,7 @@ const HomePage = () => {
             <div className="flex">
               <a
                 onClick={handleBackSlider}
-                className="rounded-lg mr-2 px-2 py-2 bg-gray-600 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-gray-300"
+                className="rounded-lg mr-2 px-2 py-2 cursor-pointer bg-gray-600 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-gray-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +150,7 @@ const HomePage = () => {
               </a>
               <a
                 onClick={handleNextSlider}
-                className="rounded-lg px-2 py-2 bg-gradient-to-r from-purple-600 to-cyan-500 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-gray-300"
+                className="rounded-lg px-2 py-2 bg-gradient-to-r cursor-pointer from-purple-600 to-cyan-500 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-gray-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -163,15 +175,19 @@ const HomePage = () => {
                 const { id, modelo, precio } = zapatilla;
                 const pos = index + 1;
                 let retrunCard = false;
-                if (principioSlider >= 6) {
-                  if (
-                    (pos >= principioSlider && pos <= 8) ||
-                    pos <= finalSlider
-                  ) {
+                if (cont < maxSlider) {
+                  if (principioSlider >= 6) {
+                    if (
+                      (pos >= principioSlider && pos <= 8) ||
+                      pos <= finalSlider
+                    ) {
+                      cont++;
+                      retrunCard = true;
+                    }
+                  } else if (pos >= principioSlider && pos <= finalSlider) {
+                    cont++;
                     retrunCard = true;
                   }
-                } else if (pos >= principioSlider && pos <= finalSlider) {
-                  retrunCard = true;
                 }
                 if (!retrunCard) return null;
                 return (
@@ -190,8 +206,8 @@ const HomePage = () => {
         id="detalles_productos"
         className="flex mx-[10rem] justify-center mb-10"
       >
-        <div className="flex mx-[10rem] justify-center">
-          <div className=" flex flex-col justify-center max-w-[26rem]">
+        <div className="flex xl:flex-row flex-col justify-center">
+          <div className=" flex flex-col justify-center max-w-[26rem] mb-10">
             <span className="text-cyan-500 text-[1rem]">
               Nuestros productos
             </span>
@@ -254,7 +270,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="min-w-[34.5rem] flex flex-col justify-center items-center">
-            <div className="ml-[3.5rem]">
+            <div className="xl:ml-[3.5rem]">
               <div className="p-[2rem] rounded-t-3xl h-fit bg-gradient-to-r from-[#2b1046] to-[#003741]">
                 <img
                   src={zapatillaCaja}
@@ -270,7 +286,7 @@ const HomePage = () => {
                   <span className="text-[1.5rem]">50.20$</span>
                   <a
                     onClick={() => alert("TODO")}
-                    className="text-[1.2rem] font-semibold rounded-lg px-1 py-[0.1rem] bg-purple-500 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-gray-300"
+                    className="text-[1.2rem] cursor-pointer font-semibold rounded-lg px-1 py-[0.1rem] bg-purple-500 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-gray-300"
                   >
                     Ver detalles
                   </a>

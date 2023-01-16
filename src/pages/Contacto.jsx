@@ -51,7 +51,7 @@ const Contacto = () => {
         id="cyan_blur_middle_left"
         className="absolute z-[0] left-[-10%] top-[82%] bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
       />
-      <div className="flex justify-center items-center">
+      <div className="flex xl:flex-row flex-col justify-center items-center">
         <div className="w-[30rem] mr-10">
           <span className="text-cyan-500 text-[1rem]">Contactanos</span>
           <h2 className="font-bold text-white text-[3rem] leading-[1.2] mt-2">

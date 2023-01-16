@@ -7,7 +7,7 @@ const Footer = () => {
       <div id="line_top" className="h-[1px] w-full bg-gray-500"></div>
       <div
         id="middle_footer"
-        className="w-full text-white flex justify-between items-center px-[29rem] py-3"
+        className="w-full text-white flex justify-around items-center py-3"
       >
         <div className="flex flex-col justify-center items-center">
           <h2 className="py-4">
@@ -86,9 +86,6 @@ const Footer = () => {
             <li className="hover:text-purple-500">
               {" "}
               <Link to={"/tienda"}>Productos</Link>
-            </li>
-            <li className="hover:text-purple-500">
-              <Link to={"/sobre_nosotros"}>Sobre Nosotros</Link>
             </li>
             <li className="hover:text-purple-500">
               <Link to={"/contacto"}>Contacto</Link>

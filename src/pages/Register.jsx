@@ -60,7 +60,6 @@ const Register = () => {
       setSubmitError("No se pudo realizar la operación");
       return;
     }
-    // TODO change user session logged
     navigate("/");
   };
 

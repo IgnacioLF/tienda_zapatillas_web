@@ -52,7 +52,9 @@ const Tienda = () => {
         className="absolute z-[0] left-[-10%] top-[82%] bottom-0 w-[17%] h-[17%] cyan__gradient rounded-full"
       />
       <div className="flex items-center justify-center">
-        <span className="font-bold text-[2.7rem] mr-5">Buscador</span>
+        <span className="font-bold md:text-[2.7rem] text-[1.7rem] mr-5">
+          Buscador
+        </span>
         <div className="flex  h-fit mt-2 text-[2rem] text-gray-900">
           <input
             type={"text"}
@@ -81,7 +83,7 @@ const Tienda = () => {
           </a>
         </div>
       </div>
-      <div className="w-full grid grid-cols-3 justify-center mr-3 max-w-[60%] min-h-[65vh]">
+      <div className="w-full grid xl:grid-cols-3 grid-cols-2 justify-center mr-3 lg:max-w-[60%] min-h-[65vh]">
         {zapatillas &&
           zapatillas.map((zapatilla, index) => {
             const { id, modelo, precio } = zapatilla;

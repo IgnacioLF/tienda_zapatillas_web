@@ -23,7 +23,7 @@ const ZapatillaCard = ({ idZapatilla, modelo, precio, styles }) => {
           <span className="font-semibold text-[1.1rem]">{precio}$</span>
           <a
             onClick={handleOnClick}
-            className="font-semibold rounded-lg px-1 py-[0.1rem] bg-cyan-500 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-purple-500"
+            className="font-semibold cursor-pointer rounded-lg px-1 py-[0.1rem] bg-cyan-500 border-2 bg-origin-border border-transparent hover:border-2 hover:border-white hover:text-purple-500"
           >
             Ver detalles
           </a>

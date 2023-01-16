@@ -10,8 +10,6 @@ import { agregarZapatillaCarrito } from "../api/ServicioWebCarrito_Spring";
 
 const ZapatillaDetalles = () => {
   const { userId } = useContext(userContext);
-  // TODO REMOVE
-  console.log("userid :", userId);
 
   const { zapatillaID } = useParams();
   const [zapatilla, setZapatilla] = useState(null);
@@ -67,12 +65,12 @@ const ZapatillaDetalles = () => {
       />
       <div className="flex justify-center items-center bg-opacity-100 bg-gradient-to-r from-[#2b1046] to-[#003741] rounded-l-3xl max-h-[40rem]">
         <img
-          className="w-[30rem] h-[30rem] mb-2"
+          className="lg:w-[30rem] lg:h-[30rem] h-[20rem] w-[20rem] mb-2"
           alt="imagen zapatilla"
           src={`${SpringHost}/subidas/${zapatilla.id}.png`}
         />
       </div>
-      <div className="min-w-[25rem] flex flex-col items-center justify-evenly bg-black-gradient-2 rounded-r-3xl">
+      <div className="lg:min-w-[25rem] min-w-[15rem] flex flex-col items-center justify-evenly bg-black-gradient-2 rounded-r-3xl">
         <h1 className="font-bold text-[3rem]">{zapatilla.modelo}</h1>
         <div className="text-[1.3rem] text-gray-300">
           <p>color : {zapatilla.color}</p>
@@ -96,7 +94,7 @@ const ZapatillaDetalles = () => {
         ) : null}
         <PurpleButton
           type={"button"}
-          styles={"font-bold text-[1.7rem] w-fit mb-2 mt-3"}
+          styles={"font-bold text-[1.7rem] w-fit mb-5 mt-3"}
           Click={handleClickAddToCart}
         >
           Comprar
